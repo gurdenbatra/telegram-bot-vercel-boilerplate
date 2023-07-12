@@ -1,5 +1,5 @@
 import { Telegraf } from 'telegraf';
-
+import { message } from 'telegraf/filters';
 import { about } from './commands';
 import { greeting } from './text';
 import { VercelRequest, VercelResponse } from '@vercel/node';
@@ -10,8 +10,13 @@ const ENVIRONMENT = process.env.NODE_ENV || '';
 
 const bot = new Telegraf(BOT_TOKEN);
 
+bot.hears('lockbox', (ctx) => ctx.reply('Yo Charlie!'))
+bot.hears('lock box', (ctx) => ctx.reply('Yo Charlie!'))
+bot.hears('what is the code', (ctx) => ctx.reply('Yo Charlie!'))
+
 bot.command('about', about());
-bot.on('message', greeting());
+// bot.on('message', greeting());
+
 
 //prod mode (Vercel)
 export const startVercel = async (req: VercelRequest, res: VercelResponse) => {
